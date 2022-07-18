@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28ff1316-9855-405f-8c44-fb9ac0d83f03">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="tanggal1" class="java.util.Date"/>
+	<parameter name="tanggal2" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     penjualan.`kode_penjualan` AS penjualan_kode_penjualan,
+     penjualan.`tanggal_penjualan` AS penjualan_tanggal_penjualan,
+     penjualan.`total_penjualan` AS penjualan_total_penjualan,
+     penjualan_detail.`kode_detail` AS penjualan_detail_kode_detail,
+     penjualan_detail.`kode_barang` AS penjualan_detail_kode_barang,
+     penjualan_detail.`jumlah` AS penjualan_detail_jumlah,
+     penjualan_detail.`harga` AS penjualan_detail_harga,
+     penjualan_detail.`subtotal` AS penjualan_detail_subtotal,
+     penjualan_detail.`kode_penjualan` AS penjualan_detail_kode_penjualan,
+     barang.`kode` AS barang_kode,
+     barang.`nama` AS barang_nama,
+     barang.`satuan` AS barang_satuan,
+     barang.`jumlah` AS barang_jumlah,
+     barang.`harga` AS barang_harga
+FROM
+     `penjualan` penjualan INNER JOIN `penjualan_detail` penjualan_detail ON penjualan.`kode_penjualan` = penjualan_detail.`kode_penjualan`
+     INNER JOIN `barang` barang ON penjualan_detail.`kode_barang` = barang.`kode`
+WHERE
+     penjualan.`tanggal_penjualan` BETWEEN $P{tanggal1}AND$P{tanggal2}]]>
+	</queryString>
+	<field name="penjualan_kode_penjualan" class="java.lang.String"/>
+	<field name="penjualan_tanggal_penjualan" class="java.sql.Timestamp"/>
+	<field name="penjualan_total_penjualan" class="java.lang.Double"/>
+	<field name="penjualan_detail_kode_detail" class="java.lang.Integer"/>
+	<field name="penjualan_detail_kode_barang" class="java.lang.String"/>
+	<field name="penjualan_detail_jumlah" class="java.lang.Integer"/>
+	<field name="penjualan_detail_harga" class="java.lang.Double"/>
+	<field name="penjualan_detail_subtotal" class="java.lang.Double"/>
+	<field name="penjualan_detail_kode_penjualan" class="java.lang.String"/>
+	<field name="barang_kode" class="java.lang.String"/>
+	<field name="barang_nama" class="java.lang.String"/>
+	<field name="barang_satuan" class="java.lang.String"/>
+	<field name="barang_jumlah" class="java.lang.Integer"/>
+	<field name="barang_harga" class="java.lang.Integer"/>
+	<group name="penjualan_kode_penjualan">
+		<groupExpression><![CDATA[$F{penjualan_kode_penjualan}]]></groupExpression>
+		<groupHeader>
+			<band height="58">
+				<textField>
+					<reportElement style="SubTitle" x="143" y="13" width="249" height="24" forecolor="#333333" uuid="bf877184-a929-4e17-a553-2d2422bd56eb"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{penjualan_kode_penjualan}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="5" y="13" width="134" height="19" uuid="cac06858-b106-4a9d-8418-6effb5b7b8af"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Kode Penjualan]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="68" y="43" width="96" height="15" uuid="2b4b344f-edb7-476d-a4c2-6fcb26d9f9bd"/>
+					<text><![CDATA[Nama Barang]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="164" y="43" width="67" height="15" uuid="96a0168f-02f6-4617-81b0-fbcddf53f28d"/>
+					<text><![CDATA[Satuan]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="5" y="43" width="63" height="15" uuid="2d6752fb-0c72-428c-beda-cec045256164"/>
+					<text><![CDATA[Kode ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="231" y="43" width="92" height="15" uuid="37e98fc2-9b1b-454f-b002-77080f6cc470"/>
+					<text><![CDATA[Harga]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="323" y="43" width="97" height="15" uuid="7cfdeb80-473b-4661-9324-38f5bbb1432d"/>
+					<text><![CDATA[Subtotal]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<textField>
+					<reportElement style="Detail" x="323" y="5" width="65" height="15" uuid="34784ffd-a802-40b0-bf88-13da20a5e1d0"/>
+					<textFieldExpression><![CDATA[$F{penjualan_total_penjualan}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="231" y="5" width="54" height="15" uuid="1527f683-60d4-42e7-bebd-8e3fc3253561"/>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="penjualan_detail_kode_barang">
+		<groupExpression><![CDATA[$F{penjualan_detail_kode_barang}]]></groupExpression>
+		<groupHeader>
+			<band height="8"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="17" width="276" height="33" uuid="b725fa58-de0c-48fd-abd2-7389dfff53b1"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PENJUALAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="a9836ad0-332b-4cd5-a5b9-e51ba3ec11c0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="453" y="15" width="100" height="20" uuid="af47e172-adbf-4dac-b703-d877b3085642"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggal2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="15" width="33" height="20" uuid="9299d7a7-d5d3-4619-aa0c-eccb7f0b3412"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[S/D]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="333" y="15" width="87" height="20" uuid="f28656e3-68a6-47e4-b88f-0bfc7d3e0d6b"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggal1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="281" y="15" width="52" height="20" uuid="1aeedae3-be99-4a0a-882e-fed55c8d00ce"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Periode :]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="890f0a10-9389-4690-8d82-227b897814e8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="72" y="1" width="92" height="15" uuid="94b1edb2-81b1-43a5-ad28-3f9d1954ccd3"/>
+				<textFieldExpression><![CDATA[$F{barang_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="164" y="1" width="67" height="15" uuid="f88e0f82-2ea5-4338-8f01-1a5340ca6548"/>
+				<textFieldExpression><![CDATA[$F{penjualan_detail_jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="231" y="0" width="92" height="15" uuid="6f9e4239-b03e-45d6-ae27-60d3cfbd3952"/>
+				<textFieldExpression><![CDATA[$F{penjualan_detail_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="323" y="0" width="97" height="15" uuid="b5e7bb3d-fab9-4774-af94-605a39b1822d"/>
+				<textFieldExpression><![CDATA[$F{penjualan_detail_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="5" y="1" width="63" height="15" uuid="389ccaba-b08f-4719-9c28-dce0bff20447"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{penjualan_detail_kode_barang}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="715057b0-6296-4908-a6a7-1b08f4025f38"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="848acdbb-c50f-4963-b9fc-15817f08b972"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="7b601356-6257-41da-bac1-29b9a087b659"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="36490b10-5970-4b4b-8b89-e41f1b4ba11c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
